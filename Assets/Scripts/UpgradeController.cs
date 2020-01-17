@@ -3,11 +3,13 @@ using UnityEngine.Serialization;
 
 public class UpgradeController : Singleton<UpgradeController>
 {
+    public void Awake()
+    {
+        public ulong money = MainController.Instance.money;
+        public ulong bonus = MainController.Instance.bonus;
+    }
 
-    public ulong money = MainController.Instance.money;
-    public ulong bonus = MainController.Instance.bonus;
-
-
+    
     public ulong price;
     public ulong priceX2X10;
     
