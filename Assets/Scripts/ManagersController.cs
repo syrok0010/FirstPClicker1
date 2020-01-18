@@ -1,19 +1,36 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ManagersController : MonoBehaviour
 {
     private ulong _money;
+    public int i1;
     public void Awake()
     {
         _money = MainController.Instance.money;
+        i1 = BuyBusiness.Instance.i1;
     }
 
-    
+    public void Update()
+    {
+        i1 = BuyBusiness.Instance.i1;
+    }
+
+    private static float CountTime(int i)
+    {
+        float time = 1;
+        if (i < 4) time = 1;
+        else if (i >= 4 & i < 6) time = 0.5f;
+        else if (6 <= i & i < 8) time /= 0.125f;
+        else if (i >= 8 & i < 10) time /= 0.015f;
+        return time;
+    }
     public void StartManager1()
     {
-        StartCoroutine(Manager(1)); 
-        if (_money >= 200) _money -= 200;
+        StartCoroutine(Manager(CountTime(i1))); 
+        if (_money >= 1000) _money -= 1000;
     }
 
     public void StartManager2()

@@ -30,7 +30,6 @@ public class BuyBusiness : Singleton<BuyBusiness>
             _money = AllUpgradeController.GetMoney(price);
             _i++;
             price = Convert.ToUInt64(Math.Round(price * (Math.E * _i)));
-            Debug.Log(businessIndex);
             switch (businessIndex)
             {
                 case 1:
