@@ -3,7 +3,13 @@ using UnityEngine;
 
 public class ManagersController : MonoBehaviour
 {
-    private ulong _money = MainController.Instance.money;
+    private ulong _money;
+    public void Awake()
+    {
+        _money = MainController.Instance.money;
+    }
+
+    
     public void StartManager1()
     {
         StartCoroutine(Manager(1)); 
@@ -25,8 +31,8 @@ public class ManagersController : MonoBehaviour
         StartCoroutine(Manager(0.01f)); 
         if (_money >= 1000000) _money -= 1000000;
     }
-    
-    IEnumerator Manager(float time)
+
+    private IEnumerator Manager(float time)
     {
         while (true)
         {

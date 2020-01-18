@@ -10,7 +10,6 @@ public class UpgradeController : Singleton<UpgradeController>
         money = MainController.Instance.money;
         bonus = MainController.Instance.bonus;
     }
-
     
     public ulong price;
     public ulong priceX2X10;
@@ -72,42 +71,51 @@ public class UpgradeController : Singleton<UpgradeController>
                 break;
         }
     }
-    public string ShopBtn(int btnIndex)
+    public void ShopBtn(int btnIndex)
     {
         GetPrice(btnIndex);
-        
-        money = AllUpgradeController.GetMoney(price);
 
-        switch (btnIndex)
+        try
         {
-            case 2:
-                price *= 2;
-                priceX2 = price;
-                price = 0;
-                upX2Bonus *= coef;
-                break;
-            case 3:
-                price *= 5;
-                priceX3 = price;
-                price = 0;
-                upX3Bonus *= coef;
-                break;
-            case 11:
-                price += 1;
-                priceP1 = price;
-                price = 0;
-                upPBonus += coef;
-                break;
-            case 15:
-                price += 10;
-                priceP5 = price;
-                price = 0;
-                upPBonus += coef;
-                break;
+            money = AllUpgradeController.GetMoney(price);
+
+            switch (btnIndex)
+            {
+                case 2:
+                    price *= 50;
+                    priceX2 = price;
+                    price = 0;
+                    upX2Bonus *= coef;
+                    break;
+                case 3:
+                    price *= 100;
+                    priceX3 = price;
+                    price = 0;
+                    upX3Bonus *= coef;
+                    break;
+                case 11:
+                    price += 5;
+                    priceP1 = price;
+                    price = 0;
+                    upPBonus += coef;
+                    break;
+                case 15:
+                    price += 30;
+                    priceP5 = price;
+                    price = 0;
+                    upPBonus += coef;
+                    break;
+            }
+            bonus = 1;
+            bonus = (bonus + upPBonus) * upX3Bonus * upX2Bonus;
+            MainController.Instance.GetMoney(money);
+            MainController.Instance.GetBonus();
         }
-        bonus = 1;
-        bonus = (bonus + upPBonus) * upX3Bonus * upX2Bonus;
-        return bonus + "/" + money;
+        catch (Exception ex)
+        {
+            Menu.Instance.OnError();
+            ShowText.Instance.OnError(ex.Message);
+        }
     }
 
     public ulong MultiplyGetPrice(int multiplier)
@@ -134,7 +142,7 @@ public class UpgradeController : Singleton<UpgradeController>
             
             for (var i = 0; i < multiplier; i++)
             {
-                result = ShopBtn(btnIndex);
+                ShopBtn(btnIndex);
             }
         }
         else
