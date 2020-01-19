@@ -2,12 +2,12 @@
 
 public static class AllUpgradeController
 {
-    static ulong money;
+    static ulong _money;
     public static ulong GetMoney(ulong price)
     {
-        money = MainController.Instance.money;
-        if (price > money) throw new Exception("Недостаточно средств");
-        money -= price;
-        return money;
+        _money = MainController.Instance.money;
+        if (price > _money) throw new Exception("Недостаточно средств");
+        _money -= price;
+        return _money;
     }
 }
