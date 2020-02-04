@@ -46,8 +46,6 @@ public class ManagersController : MonoBehaviour
         {
             MainController.Instance.OnClick(1);
             var timeIn = CountTime(i);
-            Debug.Log(time);
-            Debug.Log(timeIn);
             yield return new WaitForSeconds(timeIn);
         }
     }
@@ -57,8 +55,6 @@ public class ManagersController : MonoBehaviour
         {
             MainController.Instance.OnClick(2);
             var timeIn = CountTime(i);
-            Debug.Log(time);
-            Debug.Log(timeIn);
             yield return new WaitForSeconds(time);
         }
     }
