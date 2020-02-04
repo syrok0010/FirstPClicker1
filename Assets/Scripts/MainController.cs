@@ -1,24 +1,23 @@
-﻿using System;
-
-public class MainController : Singleton<MainController>
+﻿public class MainController : Singleton<MainController>
 {
     public ulong money;
     public ulong bonus1 = 1;
     public ulong bonus2 = 3;
 
-    public void GetMoney(ulong money)
+    public void GetMoney(ulong moneyGet)
     {
-        this.money = money;
+        money = moneyGet;
     }
-    public ulong GetBonus(int businessIndex)
+
+    private ulong GetBonus(int businessIndex)
     {
         switch (businessIndex)
         {
             case 1:
-                bonus1 = UpgradeController.Instance.bonus * BuyBusiness.Instance.bonus1;
+                bonus1 = UpgradeController.Instance.bonus * BuyBusiness.Instance.Bonus1;
                 return bonus1;
             case 2:
-                bonus2 = UpgradeController.Instance.bonus * BuyBusiness.Instance.bonus2;
+                bonus2 = UpgradeController.Instance.bonus * BuyBusiness.Instance.Bonus2;
                 return bonus2;
         }
 
@@ -29,12 +28,17 @@ public class MainController : Singleton<MainController>
         UpgradeController.Instance.ShopBtn(btnIndex);
     }
 
+    #region InDevelopment
+
     //public void MultiplyUpgrade(string multUpgrade)
-   // {
-        //var results = UpgradeController.Instance.MultiplyUpgrade(multUpgrade).Split(new char[] { '/' });
-      //  bonus = Convert.ToUInt64(results[0]);
-    //    money = Convert.ToUInt64(results[1]);
-  //  }
+    // {
+    //var results = UpgradeController.Instance.MultiplyUpgrade(multUpgrade).Split(new char[] { '/' });
+    //  bonus = Convert.ToUInt64(results[0]);
+    //     money = Convert.ToUInt64(results[1]);
+    //  }
+
+    #endregion
+   
 
     public void OnClick(int businessIndex)
     {
@@ -42,10 +46,10 @@ public class MainController : Singleton<MainController>
         {
             case 1:
                 
-                money += GetBonus(1);;
+                money += GetBonus(1);
                 break;
             case 2:
-                money += GetBonus(2);;
+                money += GetBonus(2);
                 break;
         }
     }

@@ -2,7 +2,7 @@
 
 public static class AllUpgradeController
 {
-    static ulong _money;
+    private static ulong _money;
     public static ulong GetMoney(ulong price)
     {
         _money = MainController.Instance.money;

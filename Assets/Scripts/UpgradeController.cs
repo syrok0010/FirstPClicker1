@@ -11,7 +11,6 @@ public class UpgradeController : Singleton<UpgradeController>
     }
     
     public ulong price;
-    public ulong priceX2X10;
     
     public ulong upX2Bonus = 1;
     public ulong upX3Bonus = 1;
