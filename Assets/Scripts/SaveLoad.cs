@@ -45,7 +45,6 @@ public class SaveLoad
         {
             write.Write(inJson);
         }
-        Debug.Log("Wrote");
     }
     
     
