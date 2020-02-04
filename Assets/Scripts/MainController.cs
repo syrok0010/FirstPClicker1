@@ -4,6 +4,12 @@
     public ulong bonus1 = 1;
     public ulong bonus2 = 3;
 
+    public void OnApplicationPause(bool pauseStatus)
+    {
+        var saveLoad = new SaveLoad();
+        saveLoad.Save();
+    }
+
     public void GetMoney(ulong moneyGet)
     {
         money = moneyGet;

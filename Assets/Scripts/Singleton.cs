@@ -2,7 +2,7 @@
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    public static bool isApplicationQuitting;
+    private static bool isApplicationQuitting;
     private static T _instance;
     private static object _lock = new object();
         

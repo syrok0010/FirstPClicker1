@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine.Serialization;
 
 public class UpgradeController : Singleton<UpgradeController>
 {
@@ -19,17 +18,12 @@ public class UpgradeController : Singleton<UpgradeController>
     public ulong priceX3;
     public ulong priceP1;
     public ulong priceP5;
-    public ulong coef;
-    public string result;
-    [FormerlySerializedAs("Action")] public string action;
 
     private void GetPrice(int btnIndex)
     {
         switch (btnIndex)
         {
             case 2:
-                action = "*";
-                coef = 2;
                 if (priceX2 == 0)
                 {
                     priceX2 = 20;
@@ -38,8 +32,6 @@ public class UpgradeController : Singleton<UpgradeController>
                 else price = priceX2;
                 break;
             case 3:
-                action = "*";
-                coef = 3;
                 if (priceX3 == 0)
                 {
                     priceX3 = 30;
@@ -48,8 +40,6 @@ public class UpgradeController : Singleton<UpgradeController>
                 else price = priceX3;
                 break;
             case 11:
-                action = "+";
-                coef = 1;
                 if (priceP1 == 0)
                 {
                     priceP1 = 1;
@@ -58,8 +48,6 @@ public class UpgradeController : Singleton<UpgradeController>
                 else price = priceP1;
                 break;
             case 15:
-                action = "+";
-                coef = 5;
                 if (priceP5 == 0)
                 {
                     priceP5 = 10;
@@ -83,25 +71,25 @@ public class UpgradeController : Singleton<UpgradeController>
                     price *= 50;
                     priceX2 = price;
                     price = 0;
-                    upX2Bonus *= coef;
+                    upX2Bonus *= 2;
                     break;
                 case 3:
                     price *= 100;
                     priceX3 = price;
                     price = 0;
-                    upX3Bonus *= coef;
+                    upX3Bonus *= 3;
                     break;
                 case 11:
                     price += 5;
                     priceP1 = price;
                     price = 0;
-                    upPBonus += coef;
+                    upPBonus += 1;
                     break;
                 case 15:
                     price += 30;
-                    priceP5 = price;
+                    priceP5 = 5;
                     price = 0;
-                    upPBonus += coef;
+                    upPBonus += 5;
                     break;
             }
             bonus = 1;
@@ -114,6 +102,12 @@ public class UpgradeController : Singleton<UpgradeController>
             ShowText.Instance.OnError(ex.Message);
         }
     }
+
+    #region MultiplyUpgrade
+
+    
+
+    
 
  //   public ulong MultiplyGetPrice(int multiplier)
  //   {
@@ -148,4 +142,6 @@ public class UpgradeController : Singleton<UpgradeController>
  //       }
  //       return result;
  //   }
+ 
+ #endregion
 }
