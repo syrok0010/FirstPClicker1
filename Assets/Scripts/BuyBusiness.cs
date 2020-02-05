@@ -2,8 +2,8 @@
 
 public class BuyBusiness : Singleton<BuyBusiness>
 {
-    public ulong Bonus1 { get; private set; }
-    public ulong Bonus2 { get; private set; }
+    public ulong Bonus1 { get; internal set; }
+    public ulong Bonus2 { get; internal set; }
     public ulong price1 = 1;
     public ulong price2 = 1;
     private ulong _money;

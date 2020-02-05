@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class ManagersController : MonoBehaviour
+public class ManagersController : Singleton<ManagersController>
 {
     private ulong _money;
     private int _i1;
     private int _i2;
-    public static float time; 
+    private static float _time;
+    internal bool manager1;
+    internal bool manager2;
     public void Awake()
     {
         _money = MainController.Instance.money;
@@ -21,22 +23,31 @@ public class ManagersController : MonoBehaviour
 
     private static float CountTime(int i)
     {
-        if (i < 4) time = 1;
-        else if (i >= 4 & i < 6) time = 0.5f;
-        else if (i <= 6 & i < 8) time = 0.125f;
-        else if (i >= 8 & i < 10) time = 0.015f;
-        return time;
+        if (i < 4) _time = 1;
+        else if (i >= 4 & i < 6) _time = 0.5f;
+        else if (i <= 6 & i < 8) _time = 0.125f;
+        else if (i >= 8 & i < 10) _time = 0.015f;
+        return _time;
     }
     public void StartManager1()
     {
-        StartCoroutine(Manager1( _i1)); 
-        if (_money >= 1000) _money -= 1000;
+        StartCoroutine(Manager1( _i1));
+        if (_money >= 1000)
+        {
+            _money -= 1000;
+            manager1 = true;
+        }
+        
     }
 
     public void StartManager2()
     {
-        StartCoroutine(Manager2(_i2)); 
-        if (_money >= 10000) _money -= 10000;
+        StartCoroutine(Manager2(_i2));
+        if (_money >= 10000)
+        {
+            _money -= 10000;
+            manager2 = true;
+        }
     }
     
 
@@ -55,7 +66,7 @@ public class ManagersController : MonoBehaviour
         {
             MainController.Instance.OnClick(2);
             var timeIn = CountTime(i);
-            yield return new WaitForSeconds(time);
+            yield return new WaitForSeconds(timeIn);
         }
     }
 }

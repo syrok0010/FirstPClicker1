@@ -3,7 +3,7 @@ public class DataForSaving
 {
       public DataForSaving(ulong priceP5, ulong priceP1, ulong priceX3, ulong priceX2, ulong upPBonus, ulong upX3Bonus, ulong upX2Bonus,
                               ulong money,
-                              ulong bonus1, ulong bonus2, ulong price1, ulong price2, int i1, int i2)
+                              ulong bonus1, ulong bonus2, ulong price1, ulong price2, int i1, int i2, bool manager1, bool manager2)
       {
             this.priceP5 = priceP5;
             this.priceP1 = priceP1;
@@ -19,6 +19,8 @@ public class DataForSaving
             this.price2 = price2;
             this.i1 = i1;
             this.i2 = i2;
+            this.manager1 = manager1;
+            this.manager2 = manager2;
       }
 
       public ulong money;
@@ -35,4 +37,6 @@ public class DataForSaving
       public ulong price2;
       public int i1;
       public int i2;
+      public bool manager1;
+      public bool manager2;
 }

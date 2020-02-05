@@ -1,13 +1,29 @@
-﻿public class MainController : Singleton<MainController>
+﻿using System;
+
+public class MainController : Singleton<MainController>
 {
     public ulong money;
     public ulong bonus1 = 1;
     public ulong bonus2 = 3;
 
+    public void Update()
+    {
+        GetBonus();
+    }
+
+    public void Awake()
+    {
+        SaveLoad.Load();
+    }
+
     public void OnApplicationPause(bool pauseStatus)
     {
-        var saveLoad = new SaveLoad();
-        saveLoad.Save();
+        SaveLoad.Save();
+    }
+
+    public void OnApplicationQuit()
+    {
+        SaveLoad.Save();
     }
 
     public void GetMoney(ulong moneyGet)
@@ -15,19 +31,10 @@
         money = moneyGet;
     }
 
-    private ulong GetBonus(int businessIndex)
+    private void GetBonus()
     {
-        switch (businessIndex)
-        {
-            case 1:
-                bonus1 = UpgradeController.Instance.bonus * BuyBusiness.Instance.Bonus1;
-                return bonus1;
-            case 2:
-                bonus2 = UpgradeController.Instance.bonus * BuyBusiness.Instance.Bonus2;
-                return bonus2;
-        }
-
-        return 0;
+        bonus1 = UpgradeController.Instance.bonus * BuyBusiness.Instance.Bonus1;
+        bonus2 = UpgradeController.Instance.bonus * BuyBusiness.Instance.Bonus2 * 3;
     }
     public void BonusCount(int btnIndex)
     {
@@ -51,11 +58,10 @@
         switch (businessIndex)
         {
             case 1:
-                
-                money += GetBonus(1);
+                money += bonus1;
                 break;
             case 2:
-                money += GetBonus(2);
+                money += bonus2;
                 break;
         }
     }
