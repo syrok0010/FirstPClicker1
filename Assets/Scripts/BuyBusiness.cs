@@ -46,17 +46,17 @@ public class BuyBusiness : Singleton<BuyBusiness>
             {
                 case 1:
                     i1 = _i;
-                    _i = 0;
                     Bonus1 *= 2;
                     price1 = price;
                     break;
                 case 2:
                     i2 = _i;
-                    _i = 0;
                     Bonus2 *= 3;
                     price2 = price;
                     break;
             }
+
+            _i = 0;
 
             MainController.Instance.GetMoney(_money);
             price = 0;

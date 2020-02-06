@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using UnityEngine;
+using File = UnityEngine.Windows.File;
 
 public static class SaveLoad
 {
@@ -55,6 +56,7 @@ public static class SaveLoad
 
     public static void Load()
     {
+        if (!File.Exists(Application.persistentDataPath + "save.json")) return;
         using (var reader = new StreamReader(Application.persistentDataPath + "save.json"))
         {
             var inJson = reader.ReadToEnd();
@@ -77,12 +79,10 @@ public static class SaveLoad
 
             if (data.manager1)
             {
-                ManagersController.Instance.manager1 = true;
                 ManagersController.Instance.StartManager1();
             }
             if (data.manager2)
             {
-                ManagersController.Instance.manager2 = true;
                 ManagersController.Instance.StartManager2();
             }
         }

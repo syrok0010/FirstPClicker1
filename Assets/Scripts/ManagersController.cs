@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class ManagersController : Singleton<ManagersController>
@@ -7,8 +8,8 @@ public class ManagersController : Singleton<ManagersController>
     private int _i1;
     private int _i2;
     private static float _time;
-    internal bool manager1;
-    internal bool manager2;
+    internal bool manager1 = false;
+    internal bool manager2 = false;
     public void Awake()
     {
         _money = MainController.Instance.money;
@@ -19,6 +20,7 @@ public class ManagersController : Singleton<ManagersController>
     public void Update()
     {
         _i1 = BuyBusiness.Instance.i1;
+        _i2 = BuyBusiness.Instance.i2;
     }
 
     private static float CountTime(int i)
@@ -31,25 +33,36 @@ public class ManagersController : Singleton<ManagersController>
     }
     public void StartManager1()
     {
-        StartCoroutine(Manager1( _i1));
-        if (_money >= 1000)
+        try
         {
-            _money -= 1000;
+            if (manager1) throw new Exception("Менеджер уже куплен");
+            StartCoroutine(Manager1(_i1));
+            _money = AllUpgradeController.GetMoney(1000);
             manager1 = true;
         }
-        
-    }
-
-    public void StartManager2()
-    {
-        StartCoroutine(Manager2(_i2));
-        if (_money >= 10000)
+        catch (Exception ex)
         {
-            _money -= 10000;
-            manager2 = true;
+            Exceptions.Exception(ex);
+            throw;
         }
     }
     
+    public void StartManager2()
+    {
+        try
+        {
+            if (manager2) throw new Exception("Менеджер уже куплен");
+            StartCoroutine(Manager2(_i2));
+            _money = AllUpgradeController.GetMoney(1000);
+            manager2 = true;
+        }
+        catch (Exception ex)
+        {
+            Exceptions.Exception(ex);
+            throw;
+        }
+    }
+
 
     private static IEnumerator Manager1(int i)
     {
@@ -60,6 +73,7 @@ public class ManagersController : Singleton<ManagersController>
             yield return new WaitForSeconds(timeIn);
         }
     }
+
     private static IEnumerator Manager2(int i)
     {
         while (true)

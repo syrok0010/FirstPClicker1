@@ -1,10 +1,17 @@
-﻿using System;
+﻿using UnityEngine;
 
 public class MainController : Singleton<MainController>
 {
     public ulong money;
     public ulong bonus1 = 1;
     public ulong bonus2 = 3;
+
+    public GameObject prefabParent;
+    public GameObject prefab;
+    
+    public PrefabText[] prefabText = new PrefabText[15];
+
+    private int _prefabNum = 0;
 
     public void Update()
     {
@@ -14,6 +21,10 @@ public class MainController : Singleton<MainController>
     public void Awake()
     {
         SaveLoad.Load();
+        for (var i = 0; i < prefabText.Length; i++)
+        {
+            prefabText[i] = Instantiate(prefab, prefabParent.transform).GetComponent<PrefabText>();
+        }
     }
 
     public void OnApplicationPause(bool pauseStatus)
@@ -59,10 +70,15 @@ public class MainController : Singleton<MainController>
         {
             case 1:
                 money += bonus1;
+                prefabText[_prefabNum].Motion(bonus1);
                 break;
             case 2:
                 money += bonus2;
+                prefabText[_prefabNum].Motion(bonus2);
                 break;
         }
+
+        _prefabNum++;
+        if (_prefabNum > 14) _prefabNum = 0;
     }
 }

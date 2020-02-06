@@ -80,8 +80,7 @@ public class UpgradeController : Singleton<UpgradeController>
         }
         catch (Exception ex)
         {
-            Menu.Instance.OnError();
-            ShowText.Instance.OnError(ex.Message);
+            Exceptions.Exception(ex);
         }
     }
 
