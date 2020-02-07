@@ -8,8 +8,8 @@ public class ManagersController : Singleton<ManagersController>
     private int _i1;
     private int _i2;
     private static float _time;
-    internal bool manager1 = false;
-    internal bool manager2 = false;
+    public bool manager1 = false;
+    public bool manager2 = false;
     public void Awake()
     {
         _money = MainController.Instance.money;
@@ -35,9 +35,8 @@ public class ManagersController : Singleton<ManagersController>
     {
         try
         {
-            if (manager1) throw new Exception("Менеджер уже куплен");
+            Check(1000, 1);
             StartCoroutine(Manager1(_i1));
-            _money = AllUpgradeController.GetMoney(1000);
             manager1 = true;
         }
         catch (Exception ex)
@@ -46,20 +45,46 @@ public class ManagersController : Singleton<ManagersController>
             throw;
         }
     }
+
+    private void Check(ulong price, int managerNum)
+    {
+        switch (managerNum)
+        {
+            case 1:
+                if (manager1) throw new Exception("Менеджер уже куплен");
+                break;
+            case 2:
+                if (manager2) throw new Exception("Менеджер уже куплен");
+                break;
+        }
+        _money = AllUpgradeController.GetMoney(price);
+    }
     
     public void StartManager2()
     {
         try
         {
-            if (manager2) throw new Exception("Менеджер уже куплен");
+            Check(10000, 2);
             StartCoroutine(Manager2(_i2));
-            _money = AllUpgradeController.GetMoney(1000);
             manager2 = true;
         }
         catch (Exception ex)
         {
             Exceptions.Exception(ex);
             throw;
+        }
+    }
+
+    public void StartFromSave(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                StartCoroutine(Manager1(_i1));
+                break;
+            case 2:
+                StartCoroutine(Manager2(_i2));
+                break;
         }
     }
 

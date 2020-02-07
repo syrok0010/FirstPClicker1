@@ -1,9 +1,21 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 using File = UnityEngine.Windows.File;
 
 public static class SaveLoad
 {
+    struct JsonDateTime {
+        public long value;
+        public static implicit operator DateTime(JsonDateTime jdt) {
+            return DateTime.FromFileTimeUtc(jdt.value);
+        }
+        public static implicit operator JsonDateTime(DateTime dt) { 
+            JsonDateTime jdt = new JsonDateTime();
+            jdt.value = dt.ToFileTimeUtc();
+            return jdt;
+        }
+    }
     private static ulong Money { get; set; }
     private static ulong UpX2Bonus{ get; set; }
     private static ulong UpX3Bonus{ get; set; }
@@ -20,6 +32,9 @@ public static class SaveLoad
     private static int I2{ get; set; }
     private static bool Manager1 { get; set; }
     private static bool Manager2 { get; set; }
+
+    public static DateTime time = DateTime.Now;
+    static string json = JsonUtility.ToJson((JsonDateTime) time);
 
     private static void GetData()
     {
@@ -44,12 +59,17 @@ public static class SaveLoad
 
     public static void Save()
     {
+        
         GetData();
         var dataForSaving = new DataForSaving(PriceP5, PriceP1, PriceX3, PriceX2, UpPBonus, UpX3Bonus, UpX2Bonus, Money, Bonus1, Bonus2, Price1, Price2, I1, I2, Manager1, Manager2);
         var inJson = JsonUtility.ToJson(dataForSaving);
         using (var write = new StreamWriter( Application.persistentDataPath + "save.json", false))
         {
             write.Write(inJson);
+        }
+        using (var write = new StreamWriter( Application.persistentDataPath + "time.json", false))
+        {
+            write.Write(json);
         }
     }
 
@@ -74,15 +94,24 @@ public static class SaveLoad
             BuyBusiness.Instance.price2 = data.price2;
             BuyBusiness.Instance.i1 = data.i1;
             BuyBusiness.Instance.i2 = data.i2;
+            Debug.Log(data.manager1);
+            Debug.Log(data.manager2);
 
             if (data.manager1)
             {
-                ManagersController.Instance.StartManager1();
+                ManagersController.Instance.manager1 = true;
+                ManagersController.Instance.StartFromSave(1);
             }
             if (data.manager2)
             {
-                ManagersController.Instance.StartManager2();
+                ManagersController.Instance.manager2 = true;
+                ManagersController.Instance.StartFromSave(2);
             }
+        }
+        using (var reader = new StreamReader( Application.persistentDataPath + "time.json"))
+        {
+            var data = JsonUtility.FromJson<DateTime>(reader.ReadToEnd());
+            OfflineController.Instance.datetime = data;
         }
     }
 }
