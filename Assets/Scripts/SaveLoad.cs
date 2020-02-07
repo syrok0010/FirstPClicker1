@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 using File = UnityEngine.Windows.File;
 
@@ -61,7 +60,6 @@ public static class SaveLoad
         {
             var inJson = reader.ReadToEnd();
             var data = JsonUtility.FromJson<DataForSaving>(inJson);
-            Debug.Log(Convert.ToUInt64(data.money));
             MainController.Instance.money = data.money;
             UpgradeController.Instance.upX2Bonus = data.upX2Bonus;
             UpgradeController.Instance.upX3Bonus = data.upX3Bonus;

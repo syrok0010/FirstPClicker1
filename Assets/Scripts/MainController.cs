@@ -6,12 +6,16 @@ public class MainController : Singleton<MainController>
     public ulong bonus1 = 1;
     public ulong bonus2 = 3;
 
-    public GameObject prefabParent;
+    public GameObject prefabParent1;
     public GameObject prefab;
+
+    public GameObject prefabParent2;
     
     public PrefabText[] prefabText = new PrefabText[15];
+    public PrefabText[] prefabText2 = new PrefabText[15];
 
-    private int _prefabNum = 0;
+    private int _prefabNum1;
+    private int _prefabNum2;
 
     public void Update()
     {
@@ -23,7 +27,8 @@ public class MainController : Singleton<MainController>
         SaveLoad.Load();
         for (var i = 0; i < prefabText.Length; i++)
         {
-            prefabText[i] = Instantiate(prefab, prefabParent.transform).GetComponent<PrefabText>();
+            prefabText[i] = Instantiate(prefab, prefabParent1.transform).GetComponent<PrefabText>();
+            prefabText2[i] = Instantiate(prefab, prefabParent2.transform).GetComponent<PrefabText>();
         }
     }
 
@@ -70,15 +75,16 @@ public class MainController : Singleton<MainController>
         {
             case 1:
                 money += bonus1;
-                prefabText[_prefabNum].Motion(bonus1);
+                prefabText[_prefabNum1].Motion(bonus1);
+                _prefabNum1++;
+                if (_prefabNum1 > 14) _prefabNum1 = 0;
                 break;
             case 2:
                 money += bonus2;
-                prefabText[_prefabNum].Motion(bonus2);
+                prefabText2[_prefabNum2].Motion(bonus2);
+                _prefabNum2++;
+                if (_prefabNum2 > 14) _prefabNum2 = 0;
                 break;
         }
-
-        _prefabNum++;
-        if (_prefabNum > 14) _prefabNum = 0;
     }
 }
