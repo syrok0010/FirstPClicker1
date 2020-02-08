@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Menu : Singleton<Menu>
 {
@@ -8,19 +9,30 @@ public class Menu : Singleton<Menu>
     public GameObject errorPanel;
     public GameObject managersPanel;
     public GameObject offlineGotPanel;
+    public Animator animator;
+    public bool manager1;
+    public bool manager2;
     
     public void Start()
     {
         shopPanel.SetActive(false);
         managersPanel.SetActive(false);
-        if (ManagersController.Instance.manager1 || ManagersController.Instance.manager2)
+        if (manager1 || manager2)
         {
             offlineGotPanel.SetActive(true);
         }
+
+        
     }
     public void shopPanel_ShowAndHide()
     {
-        shopPanel.SetActive(!shopPanel.activeSelf);
+        animator = shopPanel.GetComponent<Animator>();
+        if (shopPanel.transform.localPosition.x == 0) animator.SetTrigger("Exit");
+        else
+        {
+            shopPanel.SetActive(!shopPanel.activeSelf);
+        }
+
         if (managersPanel.activeSelf) managersPanel.SetActive(false);
         
     }

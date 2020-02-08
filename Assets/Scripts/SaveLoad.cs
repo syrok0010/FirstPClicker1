@@ -94,23 +94,23 @@ public static class SaveLoad
             BuyBusiness.Instance.price2 = data.price2;
             BuyBusiness.Instance.i1 = data.i1;
             BuyBusiness.Instance.i2 = data.i2;
-            Debug.Log(data.manager1);
-            Debug.Log(data.manager2);
 
             if (data.manager1)
             {
-                ManagersController.Instance.manager1 = true;
-                ManagersController.Instance.StartFromSave(1);
+                MainController.Instance.manager1 = true;
+                Menu.Instance.manager1 = true;
             }
             if (data.manager2)
             {
-                ManagersController.Instance.manager2 = true;
-                ManagersController.Instance.StartFromSave(2);
+                MainController.Instance.manager2 = true;
+                Menu.Instance.manager2 = true;
             }
         }
         using (var reader = new StreamReader( Application.persistentDataPath + "time.json"))
         {
+            Debug.Log(reader.ReadToEnd());
             var data = JsonUtility.FromJson<DateTime>(reader.ReadToEnd());
+            Debug.Log(data);
             OfflineController.Instance.datetime = data;
         }
     }

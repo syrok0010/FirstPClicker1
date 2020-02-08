@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class MainController : Singleton<MainController>
 {
@@ -17,7 +18,10 @@ public class MainController : Singleton<MainController>
     private int _prefabNum1;
     private int _prefabNum2;
 
-    public void Update()
+    public bool manager1;
+    public bool manager2;
+
+        public void Update()
     {
         GetBonus();
     }
@@ -25,6 +29,15 @@ public class MainController : Singleton<MainController>
     public void Awake()
     {
         SaveLoad.Load();
+        if (manager1 || manager2)
+        {
+            Menu.Instance.OnError();
+            ShowText.Instance.OnError("Ваши менеджеры отработали, вы можете купить новых");
+            OfflineController.Instance.GetMoney();
+            // TODO: Считаем заработок офлайн
+        }
+        
+        
         for (var i = 0; i < prefabText.Length; i++)
         {
             prefabText[i] = Instantiate(prefab, prefabParent1.transform).GetComponent<PrefabText>();
