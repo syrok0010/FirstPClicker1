@@ -20,8 +20,8 @@ public class MainController : Singleton<MainController>
 
     public bool manager1;
     public bool manager2;
-
-        public void Update()
+    
+    public void Update() 
     {
         GetBonus();
     }
@@ -33,8 +33,7 @@ public class MainController : Singleton<MainController>
         {
             Menu.Instance.OnError();
             ShowText.Instance.OnError("Ваши менеджеры отработали, вы можете купить новых");
-            OfflineController.Instance.GetMoney();
-            // TODO: Считаем заработок офлайн
+            money += OfflineController.Instance.GetMoney();
         }
         
         
@@ -60,7 +59,7 @@ public class MainController : Singleton<MainController>
         money = moneyGet;
     }
 
-    private void GetBonus()
+    internal void GetBonus()
     {
         bonus1 = UpgradeController.Instance.bonus * BuyBusiness.Instance.Bonus1;
         bonus2 = UpgradeController.Instance.bonus * BuyBusiness.Instance.Bonus2 * 3;

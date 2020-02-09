@@ -9,13 +9,13 @@ public class BuyBusiness : Singleton<BuyBusiness>
     private ulong _money;
     private int _i;
     public int i1 = 1;
-    public int i2 = 1;
+    public int i2 = 0;
     public ulong price = 1;
 
     public BuyBusiness()
     {
         Bonus1 = 1;
-        Bonus2 = 1;
+        Bonus2 = 0;
     }
 
     private void GetPrice(int businessIndex)
@@ -51,6 +51,7 @@ public class BuyBusiness : Singleton<BuyBusiness>
                     break;
                 case 2:
                     i2 = _i;
+                    if (Bonus2 == 0) Bonus2 = 1;
                     Bonus2 *= 3;
                     price2 = price;
                     break;

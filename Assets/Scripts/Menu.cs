@@ -38,7 +38,13 @@ public class Menu : Singleton<Menu>
     }
     public void managersPanel_ShowAndHide()
     {
-        managersPanel.SetActive(!managersPanel.activeSelf);
+        animator = managersPanel.GetComponent<Animator>();
+        if (managersPanel.transform.localPosition.x == 0) animator.SetTrigger("Exit");
+        else
+        {
+            managersPanel.SetActive(!managersPanel.activeSelf);
+        }
+
         if (shopPanel.activeSelf) shopPanel.SetActive(false);
     }
 
