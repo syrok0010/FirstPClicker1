@@ -18,6 +18,7 @@ public class OfflineController : Singleton<OfflineController>
 
     private void CountTime()
     {
+        if (string.IsNullOrWhiteSpace(dateTimeString)) return;
         var a = dateTimeString.Split(new char[] { ':' }).Select(int.Parse).ToArray();
         _savedDateTime = new DateTime(a[0], a[1], a[2], a[3], a[4], a[5], a[6]);
     }

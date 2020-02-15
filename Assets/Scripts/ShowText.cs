@@ -18,7 +18,7 @@ public class ShowText : Singleton<ShowText>
 
     public void Update()
     {
-        balanceText.text = $"Ваш баланс\n\r {MainController.Instance.money}$";
+        balanceText.text = $"{MainController.Instance.money}$";
         busOne.text = Convert.ToString(BuyBusiness.Instance.i1);
         busTwo.text = Convert.ToString(BuyBusiness.Instance.i2);
         busOnePrice.text = BuyBusiness.Instance.price1 == 0 ? "Buy" : $"Buy\n\r for {BuyBusiness.Instance.price1}$";

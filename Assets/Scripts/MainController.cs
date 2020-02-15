@@ -1,5 +1,6 @@
-﻿using System;
+﻿using Assets.Scripts;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MainController : Singleton<MainController>
 {
@@ -62,7 +63,7 @@ public class MainController : Singleton<MainController>
     internal void GetBonus()
     {
         bonus1 = UpgradeController.Instance.bonus * BuyBusiness.Instance.Bonus1;
-        bonus2 = UpgradeController.Instance.bonus * BuyBusiness.Instance.Bonus2 * 3;
+        bonus2 = UpgradeController.Instance.bonus * BuyBusiness.Instance.Bonus2 * 2;
     }
     public void BonusCount(int btnIndex)
     {

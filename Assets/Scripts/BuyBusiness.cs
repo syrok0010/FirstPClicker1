@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.Businesses;
 
 public class BuyBusiness : Singleton<BuyBusiness>
 {
@@ -67,5 +68,21 @@ public class BuyBusiness : Singleton<BuyBusiness>
             Menu.Instance.OnError();
             ShowText.Instance.OnError(ex.Message);
         }
+    }
+
+    public void BuyBusinessNew(int businessIndex)
+    {
+        switch (businessIndex)
+        {
+            case 1:
+                var business = new Business1(_money);
+                business.Buy();
+                break;
+            case 2:
+                var business1 = new Business2(_money);
+                business1.Buy();
+                break;
+        }
+
     }
 }
