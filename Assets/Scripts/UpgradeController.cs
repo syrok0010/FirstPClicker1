@@ -47,7 +47,7 @@ public class UpgradeController : Singleton<UpgradeController>
 
         try
         {
-            money = AllUpgradeController.GetMoney(price);
+            if (!AllUpgradeController.GetMoney(price)) return;
 
             switch (btnIndex)
             {
@@ -76,7 +76,6 @@ public class UpgradeController : Singleton<UpgradeController>
             price = 0;
             bonus = 1;
             bonus = (bonus + upPBonus) * upX3Bonus * upX2Bonus;
-            MainController.Instance.GetMoney(money);
         }
         catch (Exception ex)
         {

@@ -1,25 +1,20 @@
-﻿namespace Assets.Scripts.Businesses
+﻿using Assets.Scripts;
+namespace Businesses
 {
-    public class Business1 : IBuyable
+    public class Business1 : Singleton<Business1>, IBuyable
     {
-        public int I1 { get; private set; }
-        public ulong Price1 { get; private set; }
-        public ulong Bonus1 { get; private set; }
-        public ulong Money { get; private set; }
+        public int I { get; internal set; }
+        public ulong Price { get; internal set; }
+        public ulong Bonus { get; internal set; }
 
-        public Business1(ulong money)
+        public void Buy(ulong money)
         {
-            Money = money;
-        }
-        public void Buy()
-        {
-            var abusiness = new ABusiness(Money, I1, 1, Price1, Bonus1);
+            var abusiness = new ABusiness( I, 1, Price, Bonus);
             abusiness.BuyBusiness();
-            I1 = abusiness.I;
-            Price1 = abusiness.Price;
-            MainController.Instance.GetMoney(abusiness.Money);
+            I = abusiness.I;
+            Price = abusiness.Price;
             MainController.Instance.bonus1 = abusiness.Bonus;
-            Bonus1 = abusiness.Bonus;
+            Bonus = abusiness.Bonus;
         }
     }
 }

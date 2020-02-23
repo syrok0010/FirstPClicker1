@@ -1,6 +1,4 @@
-﻿using System;
-
-[System.Serializable]
+﻿[System.Serializable]
 public class DataForSaving
 {
       public DataForSaving(ulong priceP5, ulong priceP1, ulong priceX3, ulong priceX2, ulong upPBonus, ulong upX3Bonus, ulong upX2Bonus,

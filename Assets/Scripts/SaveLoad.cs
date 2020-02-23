@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Businesses;
 using UnityEngine;
 using File = System.IO.File;
 
@@ -32,12 +33,12 @@ public static class SaveLoad
         PriceX3 = UpgradeController.Instance.priceX3;
         PriceP1 = UpgradeController.Instance.priceP1;
         PriceP5 = UpgradeController.Instance.priceP5;
-        Bonus1 = BuyBusiness.Instance.Bonus1;
-        Bonus2 = BuyBusiness.Instance.Bonus2;
-        Price1 = BuyBusiness.Instance.price1;
-        Price2 = BuyBusiness.Instance.price2;
-        I1 = BuyBusiness.Instance.i1;
-        I2 = BuyBusiness.Instance.i2;
+        Bonus1 = Business1.Instance.Bonus;
+        Bonus2 = Business2.Instance.Bonus;
+        Price1 = Business1.Instance.Price;
+        Price2 = Business2.Instance.Price;
+        I1 = Business1.Instance.I;
+        I2 = Business2.Instance.I;
         Manager1 = ManagersController.Instance.manager1;
         Manager2 = ManagersController.Instance.manager2;
         var saveDateTime = new SaveDateTime(System.DateTime.Now.Year,System.DateTime.Now.Month, System.DateTime.Now.Day,System.DateTime.Now.Hour,System.DateTime.Now.Minute, System.DateTime.Now.Second,System.DateTime.Now.Millisecond);
@@ -71,26 +72,23 @@ public static class SaveLoad
             UpgradeController.Instance.priceX3 = data.priceX3;
             UpgradeController.Instance.priceP1 = data.priceP1;
             UpgradeController.Instance.priceP5 = data.priceP5;
-            BuyBusiness.Instance.Bonus1 = data.bonus1;
-            BuyBusiness.Instance.Bonus2 = data.bonus2;
-            BuyBusiness.Instance.price1 = data.price1;
-            BuyBusiness.Instance.price2 = data.price2;
-            BuyBusiness.Instance.i1 = data.i1;
-            BuyBusiness.Instance.i2 = data.i2;
+            Business1.Instance.Bonus = data.bonus1;
+            Business2.Instance.Bonus = data.bonus2;
+            Business1.Instance.Price = data.price1;
+            Business2.Instance.Price = data.price2;
+            Business1.Instance.I = data.i1;
+            Business2.Instance.I = data.i2;
             OfflineController.Instance.dateTimeString = data.dateTime;
 
-            if (data.manager1)
-            {
-                MainController.Instance.manager1 = true;
-                Menu.Instance.manager1 = true;
-                OfflineController.Instance.manager1 = true;
-            }
-            if (data.manager2)
-            {
-                MainController.Instance.manager2 = true;
-                Menu.Instance.manager2 = true;
-                OfflineController.Instance.manager2 = true;
-            }
+            if (!data.manager1) return;
+            MainController.Instance.manager1 = true;
+            Menu.Instance.manager1 = true;
+            OfflineController.Instance.manager1 = true;
+
+            if (!data.manager2) return;
+            MainController.Instance.manager2 = true;
+            Menu.Instance.manager2 = true;
+            OfflineController.Instance.manager2 = true;
         }
     }
 }

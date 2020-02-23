@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Businesses;
 
 public class OfflineController : Singleton<OfflineController>
 {
@@ -7,7 +8,7 @@ public class OfflineController : Singleton<OfflineController>
     public bool manager2;
     public string dateTimeString;
     private DateTime _savedDateTime;
-    private DateTime _now = DateTime.Now;
+    private readonly DateTime _now = DateTime.Now;
     public TimeSpan offline;
 
     public void Awake()
@@ -28,9 +29,9 @@ public class OfflineController : Singleton<OfflineController>
         CountTime();
         var timeToEarn = _now.Subtract(_savedDateTime).TotalSeconds;
         MainController.Instance.GetBonus();
-        var money1 = (timeToEarn / ManagersController.CountTime(BuyBusiness.Instance.i1)) *
+        var money1 = (timeToEarn / ManagersController.CountTime(Business1.Instance.I)) *
                      MainController.Instance.bonus1;
-        var money2 = (timeToEarn / ManagersController.CountTime(BuyBusiness.Instance.i2)) *
+        var money2 = (timeToEarn / ManagersController.CountTime(Business2.Instance.I)) *
                      MainController.Instance.bonus2;
         if (manager1 && manager2)
         {

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 
 namespace TMPro.Examples
@@ -409,7 +408,7 @@ namespace TMPro.Examples
             {
                 TMP_LineInfo lineInfo = textInfo.lineInfo[i];
 
-                bool isLineVisible = (lineInfo.characterCount == 1 && (textInfo.characterInfo[lineInfo.firstCharacterIndex].character == 10 || textInfo.characterInfo[lineInfo.firstCharacterIndex].character == 11)) ||
+                bool isLineVisible = (lineInfo.characterCount == 1 && (textInfo.characterInfo[lineInfo.firstCharacterIndex].character == 10 || textInfo.characterInfo[lineInfo.firstCharacterIndex].character == 11 || textInfo.characterInfo[lineInfo.firstCharacterIndex].character == 0x2028 || textInfo.characterInfo[lineInfo.firstCharacterIndex].character == 0x2029)) ||
                                       i > m_TextComponent.maxVisibleLines ||
                                      (m_TextComponent.overflowMode == TextOverflowModes.Page && textInfo.characterInfo[lineInfo.firstCharacterIndex].pageNumber + 1 != m_TextComponent.pageToDisplay) ? false : true;
 

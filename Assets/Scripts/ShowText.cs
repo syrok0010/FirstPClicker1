@@ -1,4 +1,5 @@
 ﻿using System;
+using Businesses;
 using UnityEngine.UI;
 
 public class ShowText : Singleton<ShowText>
@@ -19,10 +20,10 @@ public class ShowText : Singleton<ShowText>
     public void Update()
     {
         balanceText.text = $"{MainController.Instance.money}$";
-        busOne.text = Convert.ToString(BuyBusiness.Instance.i1);
-        busTwo.text = Convert.ToString(BuyBusiness.Instance.i2);
-        busOnePrice.text = BuyBusiness.Instance.price1 == 0 ? "Buy" : $"Buy\n\r for {BuyBusiness.Instance.price1}$";
-        busTwoPrice.text = BuyBusiness.Instance.price2 == 0 ? "Buy" : $"Buy\n\r for {BuyBusiness.Instance.price2}$";
+        busOne.text = Convert.ToString(Business1.Instance.I);
+        busTwo.text = Convert.ToString(Business2.Instance.I);
+        busOnePrice.text = Business1.Instance.Price == 0 ? "Buy" : $"Buy\n\r for {Business1.Instance.Price}$";
+        busTwoPrice.text = Business2.Instance.Price == 0 ? "Buy" : $"Buy\n\r for {Business2.Instance.Price}$";
         x2Text.text = UpgradeController.Instance.priceX2 == 0 ? "X2 за клик 20$" : $"X2 за клик {UpgradeController.Instance.priceX2}$";
         x3Text.text = UpgradeController.Instance.priceX3 == 0 ? "X3 за клик 30$" : $"X3 за клик {UpgradeController.Instance.priceX3}$";
         p5Text.text = UpgradeController.Instance.priceP5 == 0 ? "+5 за клик 10$" : $"+5 за клик {UpgradeController.Instance.priceP5}$";

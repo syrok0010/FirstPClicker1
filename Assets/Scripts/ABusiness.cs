@@ -7,16 +7,15 @@ public class ABusiness
     public int I { get; private set; }
     public ulong Price { get; private set; }
     public ulong Bonus { get; private set; }
-    public ulong Money { get; private set; }
 
 
-    public ABusiness(ulong money, int i, int businessIndex, ulong price, ulong bonus)
+    public ABusiness(int i, int businessIndex, ulong price, ulong bonus)
     {
-        Money = money;
         I = i;
         BusinessIndex = businessIndex;
         Price = price;
         Bonus = bonus;
+        if (Bonus == 0) Bonus = 1;
     }
     private void Change()
     {
@@ -24,12 +23,12 @@ public class ABusiness
         switch (BusinessIndex)
         {
             case 1:
-                Price *= (ulong)Math.Round(Math.E * Math.PI * 3 * I);
+                Price *= (ulong)Math.Round(Math.Pow(Math.E, Math.PI) * 3 * I);
                 Bonus *= (ulong)Math.E;
 
                 break;
             case 2:
-                Price *= (ulong)Math.Round(Math.E * Math.PI * 7 * I);
+                Price *= (ulong)Math.Round(Math.Pow(Math.E, Math.PI) * 5 * I);
                 Bonus *= (ulong)Math.E * 2;
                 break;
         }
@@ -47,9 +46,8 @@ public class ABusiness
         try
         {
             Check();
-            Money = AllUpgradeController.GetMoney(Price);
+            if (!AllUpgradeController.GetMoney(Price)) return;
             Change();
-            MainController.Instance.GetMoney(Money);
         }
         catch (Exception ex)
         {

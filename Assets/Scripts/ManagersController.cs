@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Businesses;
 using UnityEngine;
 
 public class ManagersController : Singleton<ManagersController>
@@ -17,14 +18,14 @@ public class ManagersController : Singleton<ManagersController>
 
     public void Awake()
     {
-        _i1 = BuyBusiness.Instance.i1;
-        _i2 = BuyBusiness.Instance.i2;
+        _i1 = Business1.Instance.I;
+        _i2 = Business2.Instance.I;
     }
 
     public void Update()
     {
-        _i1 = BuyBusiness.Instance.i1;
-        _i2 = BuyBusiness.Instance.i2;
+        _i1 = Business1.Instance.I;
+        _i2 = Business2.Instance.I;
     }
 
     public static float CountTime(int i)
@@ -39,7 +40,7 @@ public class ManagersController : Singleton<ManagersController>
     {
         try
         {
-            MainController.Instance.money = Check(1000, 1);
+            if(!Check(1000, 1)) return;
             StartCoroutine(Manager1(_i1));
             manager1 = true;
         }
@@ -50,7 +51,7 @@ public class ManagersController : Singleton<ManagersController>
         }
     }
 
-    private ulong Check(ulong price, int managerNum)
+    private bool Check(ulong price, int managerNum)
     {
         switch (managerNum)
         {
@@ -68,7 +69,7 @@ public class ManagersController : Singleton<ManagersController>
     {
         try
         {
-            MainController.Instance.money = Check(10000, 2);
+            if (!Check(10000, 2)) return;
             StartCoroutine(Manager2(_i2));
             manager2 = true;
         }
