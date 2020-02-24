@@ -53,6 +53,7 @@ public class Menu : Singleton<Menu>
     {
         var path = Application.persistentDataPath + "save.json";
         if (File.Exists(path)) File.Delete(path);
+        MainController.Instance.toSave = false;
         Application.Quit();
     }
     #region Error
@@ -65,10 +66,11 @@ public class Menu : Singleton<Menu>
     {
         errorPanel.SetActive(false);
     }
+    #endregion
 
     public void CloseOfflineGotPanel()
     {
         offlineGotPanel.SetActive(false);
     }
-    #endregion
+    
 }

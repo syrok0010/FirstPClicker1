@@ -19,12 +19,15 @@ public class MainController : Singleton<MainController>
     private int _prefabNum1;
     private int _prefabNum2;
 
+    [HideInInspector]public bool toSave = true;
+
     public bool manager1;
     public bool manager2;
 
     [NonSerialized] public string datetime;
     [NonSerialized] public string pMoney;
     [NonSerialized] public string offline;
+    public OfflineController offlineController;
 
     public void Update() 
     {
@@ -34,9 +37,6 @@ public class MainController : Singleton<MainController>
     public void Awake()
     {
         SaveLoad.Load();
-        
-        
-        
         for (var i = 0; i < prefabText.Length; i++)
         {
             prefabText[i] = Instantiate(prefab, prefabParent1.transform).GetComponent<PrefabText>();
@@ -54,23 +54,33 @@ public class MainController : Singleton<MainController>
 
         UpgradeController.Instance.CountBonus();
         if (!manager1 && !manager2) return;
-        var offlineController = new OfflineController(datetime, manager1, manager2);
+        offlineController = new OfflineController(datetime, manager1, manager2);
         offlineController.CountTime();
         Menu.Instance.OnError();
         ShowText.Instance.OnError("Ваши менеджеры отработали, вы можете купить новых");
         pMoney = offlineController.GetMoney().ToString();
         offline = offlineController.offline.ToString();
-        money += Convert.ToUInt64(pMoney);
+        
+    }
+
+    public void OfflineGot(int x)
+    {
+        money += (Convert.ToUInt64(pMoney)) * (ulong) x;
     }
 
     public void OnApplicationPause(bool pauseStatus)
     {
-        SaveLoad.Save();
+        if (toSave)
+        {
+            SaveLoad.Save();
+        }
     }
-
     public void OnApplicationQuit()
     {
-        SaveLoad.Save();
+        if (toSave)
+        {
+            SaveLoad.Save();
+        }
     }
 
     public void GetMoney(ulong moneyGet)

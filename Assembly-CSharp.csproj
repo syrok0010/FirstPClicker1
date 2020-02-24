@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\Menu.cs" />
      <Compile Include="Assets\Scripts\OfflineController.cs" />
      <Compile Include="Assets\Scripts\PrefabText.cs" />
+     <Compile Include="Assets\Scripts\RewardedAdsButton.cs" />
      <Compile Include="Assets\Scripts\SaveDateTime.cs" />
      <Compile Include="Assets\Scripts\SaveLoad.cs" />
      <Compile Include="Assets\Scripts\ShowText.cs" />
@@ -161,6 +162,12 @@
  </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Users/steam/Desktop/2/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Monetization">
+ <HintPath>C:/Users/steam/Desktop/2/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>C:/Users/steam/Desktop/2/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.0a18/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
