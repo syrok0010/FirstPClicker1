@@ -75,7 +75,7 @@ public class UpgradeController : Singleton<UpgradeController>
 
             price = 0;
             bonus = 1;
-            bonus = (bonus + upPBonus) * upX3Bonus * upX2Bonus;
+            bonus = CountBonus();
         }
         catch (Exception ex)
         {
@@ -83,6 +83,10 @@ public class UpgradeController : Singleton<UpgradeController>
         }
     }
 
+    public ulong CountBonus()
+    {
+        return bonus = (bonus + upPBonus) * upX3Bonus * upX2Bonus;
+    }
     #region MultiplyUpgrade
 
     

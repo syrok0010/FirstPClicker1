@@ -1,7 +1,4 @@
-﻿namespace Assets.Scripts
+﻿interface IBuyable
 {
-    interface IBuyable
-    {
-        void Buy(ulong money);
-    }
+    void Buy(ulong money);
 }

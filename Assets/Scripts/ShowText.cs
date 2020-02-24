@@ -28,8 +28,8 @@ public class ShowText : Singleton<ShowText>
         x3Text.text = UpgradeController.Instance.priceX3 == 0 ? "X3 за клик 30$" : $"X3 за клик {UpgradeController.Instance.priceX3}$";
         p5Text.text = UpgradeController.Instance.priceP5 == 0 ? "+5 за клик 10$" : $"+5 за клик {UpgradeController.Instance.priceP5}$";
         p1Text.text = UpgradeController.Instance.priceP1 == 0 ? "+1 за клик 1$" : $"+1 за клик {UpgradeController.Instance.priceP1}$";
-        offlineTime.text = "Вас не было:\n\r" + OfflineController.Instance.offline;
-        offlineMoney.text = "Ваши менеджеры заработали:\n\r" + OfflineController.Instance.GetMoney().ToString();
+        offlineTime.text = "Вас не было:\n\r" + MainController.Instance.offline;
+        offlineMoney.text = "Ваши менеджеры заработали:\n\r" + MainController.Instance.pMoney;
     }
 
     public void OnError(string text)

@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
+using File = System.IO.File;
 
 public class Menu : Singleton<Menu>
 {
-    
-
     public GameObject shopPanel;
     public GameObject errorPanel;
     public GameObject managersPanel;
@@ -20,8 +19,6 @@ public class Menu : Singleton<Menu>
         {
             offlineGotPanel.SetActive(true);
         }
-
-        
     }
     public void shopPanel_ShowAndHide()
     {
@@ -47,6 +44,18 @@ public class Menu : Singleton<Menu>
         if (shopPanel.activeSelf) shopPanel.SetActive(false);
     }
 
+    public void Close()
+    {
+        Application.Quit();
+    }
+
+    public void Restart()
+    {
+        var path = Application.persistentDataPath + "save.json";
+        if (File.Exists(path)) File.Delete(path);
+        Application.Quit();
+    }
+    #region Error
     public void OnError()
     {
         errorPanel.SetActive(true);
@@ -61,4 +70,5 @@ public class Menu : Singleton<Menu>
     {
         offlineGotPanel.SetActive(false);
     }
+    #endregion
 }

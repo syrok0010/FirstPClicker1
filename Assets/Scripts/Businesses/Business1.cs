@@ -1,5 +1,4 @@
-﻿using Assets.Scripts;
-namespace Businesses
+﻿namespace Businesses
 {
     public class Business1 : Singleton<Business1>, IBuyable
     {

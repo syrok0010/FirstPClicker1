@@ -1,4 +1,5 @@
-﻿using Businesses;
+﻿using System;
+using Businesses;
 using UnityEngine;
 
 public class MainController : Singleton<MainController>
@@ -20,7 +21,11 @@ public class MainController : Singleton<MainController>
 
     public bool manager1;
     public bool manager2;
-    
+
+    [NonSerialized] public string datetime;
+    [NonSerialized] public string pMoney;
+    [NonSerialized] public string offline;
+
     public void Update() 
     {
         GetBonus();
@@ -29,12 +34,7 @@ public class MainController : Singleton<MainController>
     public void Awake()
     {
         SaveLoad.Load();
-        if (manager1 || manager2)
-        {
-            Menu.Instance.OnError();
-            ShowText.Instance.OnError("Ваши менеджеры отработали, вы можете купить новых");
-            money += OfflineController.Instance.GetMoney();
-        }
+        
         
         
         for (var i = 0; i < prefabText.Length; i++)
@@ -42,6 +42,25 @@ public class MainController : Singleton<MainController>
             prefabText[i] = Instantiate(prefab, prefabParent1.transform).GetComponent<PrefabText>();
             prefabText2[i] = Instantiate(prefab, prefabParent2.transform).GetComponent<PrefabText>();
         }
+    }
+
+    private void Start()
+    {
+        if (Business1.Instance.Bonus == 0 || Business1.Instance.I == 0)
+        {
+            Business1.Instance.Bonus = 1;
+            Business1.Instance.I = 1;
+        }
+
+        UpgradeController.Instance.CountBonus();
+        if (!manager1 && !manager2) return;
+        var offlineController = new OfflineController(datetime, manager1, manager2);
+        offlineController.CountTime();
+        Menu.Instance.OnError();
+        ShowText.Instance.OnError("Ваши менеджеры отработали, вы можете купить новых");
+        pMoney = offlineController.GetMoney().ToString();
+        offline = offlineController.offline.ToString();
+        money += Convert.ToUInt64(pMoney);
     }
 
     public void OnApplicationPause(bool pauseStatus)

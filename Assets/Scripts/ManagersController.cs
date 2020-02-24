@@ -15,13 +15,6 @@ public class ManagersController : Singleton<ManagersController>
     {
         manager2 = false;
     }
-
-    public void Awake()
-    {
-        _i1 = Business1.Instance.I;
-        _i2 = Business2.Instance.I;
-    }
-
     public void Update()
     {
         _i1 = Business1.Instance.I;

@@ -65,6 +65,7 @@ public static class SaveLoad
             var inJson = reader.ReadToEnd();
             var data = JsonUtility.FromJson<DataForSaving>(inJson);
             MainController.Instance.money = data.money;
+            MainController.Instance.datetime = data.dateTime;
             UpgradeController.Instance.upX2Bonus = data.upX2Bonus;
             UpgradeController.Instance.upX3Bonus = data.upX3Bonus;
             UpgradeController.Instance.upPBonus = data.upPBonus;
@@ -78,17 +79,14 @@ public static class SaveLoad
             Business2.Instance.Price = data.price2;
             Business1.Instance.I = data.i1;
             Business2.Instance.I = data.i2;
-            OfflineController.Instance.dateTimeString = data.dateTime;
 
             if (!data.manager1) return;
             MainController.Instance.manager1 = true;
             Menu.Instance.manager1 = true;
-            OfflineController.Instance.manager1 = true;
 
             if (!data.manager2) return;
             MainController.Instance.manager2 = true;
             Menu.Instance.manager2 = true;
-            OfflineController.Instance.manager2 = true;
         }
     }
 }

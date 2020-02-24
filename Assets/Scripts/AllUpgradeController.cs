@@ -10,11 +10,9 @@ public static class AllUpgradeController
         {
             throw new Exception("Недостаточно средств");
         }
-        else
-        {
-            _money -= price;
-            MainController.Instance.GetMoney(_money);
-            return true;
-        }
+
+        _money -= price;
+        MainController.Instance.GetMoney(_money);
+        return true;
     }
 }
