@@ -1,7 +1,7 @@
 ﻿[System.Serializable]
 public class DataForSaving
 {
-      public DataForSaving(ulong priceP5, ulong priceP1, ulong priceX3, ulong priceX2, ulong upPBonus, ulong upX3Bonus, ulong upX2Bonus,
+      public DataForSaving(ulong priceP5, ulong priceP1, ulong priceX3, ulong priceX2, ulong upP1Bonus, ulong upP5Bonus, ulong upX3Bonus, ulong upX2Bonus,
                               ulong money,
                               ulong bonus1, ulong bonus2, ulong price1, ulong price2, int i1, int i2, bool manager1, bool manager2, string dateTime)
       {
@@ -9,7 +9,7 @@ public class DataForSaving
             this.priceP1 = priceP1;
             this.priceX3 = priceX3;
             this.priceX2 = priceX2;
-            this.upPBonus = upPBonus;
+            this.upP1Bonus = upP1Bonus;
             this.upX3Bonus = upX3Bonus;
             this.upX2Bonus = upX2Bonus;
             this.money = money;
@@ -28,7 +28,8 @@ public class DataForSaving
       public ulong money;
       public ulong upX2Bonus;
       public ulong upX3Bonus;
-      public ulong upPBonus;
+      public ulong upP1Bonus;
+      public ulong upP5Bonus;
       public ulong priceX2;
       public ulong priceX3;
       public ulong priceP1;

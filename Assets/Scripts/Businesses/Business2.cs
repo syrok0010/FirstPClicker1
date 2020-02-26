@@ -6,7 +6,7 @@
         public ulong Price { get; internal set; }
         public ulong Bonus { get; internal set; }
 
-        public void Buy(ulong money)
+        public void Buy(int money)
         {
             var abusiness = new ABusiness(I, 2, Price, Bonus);
             abusiness.BuyBusiness();

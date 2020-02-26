@@ -1,4 +1,4 @@
 ﻿interface IBuyable
 {
-    void Buy(ulong money);
+    void Buy(int money);
 }
