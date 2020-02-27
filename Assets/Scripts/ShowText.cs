@@ -1,5 +1,6 @@
 ﻿using System;
 using Businesses;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Upgrades;
 
@@ -17,6 +18,7 @@ public class ShowText : Singleton<ShowText>
     public Text errorText;
     public Text offlineTime;
     public Text offlineMoney;
+    public Text confirm;
 
     public void Update()
     {
@@ -31,6 +33,11 @@ public class ShowText : Singleton<ShowText>
         p1Text.text = P1.Instance.Price == 0 ? "+1 за клик 5$" : $"+1 за клик {P1.Instance.Price}$";
         offlineTime.text = "Вас не было:\n\r" + MainController.Instance.offline;
         offlineMoney.text = "Ваши менеджеры заработали:\n\r" + MainController.Instance.pMoney;
+    }
+
+    public void ConfirmRestart()
+    {
+        confirm.text = "Вы уверены,\n\r что хотите сбросить весь прогресс?";
     }
 
     public void OnError(string text)

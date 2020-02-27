@@ -7,9 +7,11 @@ public class Menu : Singleton<Menu>
     public GameObject errorPanel;
     public GameObject managersPanel;
     public GameObject offlineGotPanel;
+    public GameObject confirm;
     public Animator animator;
     public bool manager1;
     public bool manager2;
+    private int _type;
     
     public void Start()
     {
@@ -46,15 +48,36 @@ public class Menu : Singleton<Menu>
 
     public void Close()
     {
+        confirm.SetActive(true);
+        _type = 1;
+    }
+
+    public void CloseAfterConfirm()
+    {
+        if (_type == 2)
+        {
+            RestartConfirmed();
+        }
         Application.Quit();
+    }
+
+    public void CloseNotConfirmed()
+    {
+        confirm.SetActive(false);
     }
 
     public void Restart()
     {
+        confirm.SetActive(true);
+        _type = 2;
+        ShowText.Instance.ConfirmRestart();
+    }
+
+    private void RestartConfirmed()
+    {
         var path = Application.persistentDataPath + "save.json";
         if (File.Exists(path)) File.Delete(path);
         MainController.Instance.toSave = false;
-        Application.Quit();
     }
     #region Error
     public void OnError()
