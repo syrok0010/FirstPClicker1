@@ -30,11 +30,6 @@ public class MainController : Singleton<MainController>
     [NonSerialized] public string offline;
     public OfflineController offlineController;
 
-    public void Update() 
-    {
-        GetBonus();
-    }
-
     public void Awake()
     {
         SaveLoad.Load();
@@ -55,13 +50,18 @@ public class MainController : Singleton<MainController>
 
         UpgradeController.Instance.CountBonus();
         if (!manager1 && !manager2) return;
+        CountOffline();
+        GetBonus();
+    }
+
+    private void CountOffline()
+    {
         offlineController = new OfflineController(datetime, manager1, manager2);
         offlineController.CountTime();
         Menu.Instance.OnError();
         ShowText.Instance.OnError("Ваши менеджеры отработали, вы можете купить новых");
         pMoney = offlineController.GetMoney().ToString();
         offline = offlineController.offline.ToString();
-        
     }
 
     public void OfflineGot(int x)
@@ -91,6 +91,7 @@ public class MainController : Singleton<MainController>
 
     internal void GetBonus()
     {
+        Debug.Log("It worked!");
         bonus1 = (P1.Instance.Bonus + P5.Instance.Bonus) * X2.Instance.Bonus * X3.Instance.Bonus * Business1.Instance.Bonus;
         bonus2 = (P1.Instance.Bonus + P5.Instance.Bonus) * X2.Instance.Bonus * X3.Instance.Bonus * Business2.Instance.Bonus;
     }

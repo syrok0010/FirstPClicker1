@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Upgrades
+﻿namespace Upgrades
 {
     public class P1 : Singleton<P1>, IBuyable
     {
@@ -19,8 +17,6 @@ namespace Upgrades
             Bonus = buyUpgrade.Bonus;
             Price = buyUpgrade.Price;
             MainController.Instance.GetBonus();
-            Debug.Log(Price);
-            Debug.Log(Bonus);
         }
     }
 }

@@ -12,8 +12,8 @@
             abusiness.BuyBusiness();
             I = abusiness.I;
             Price = abusiness.Price;
-            MainController.Instance.bonus1 = abusiness.Bonus;
             Bonus = abusiness.Bonus;
+            MainController.Instance.GetBonus();
         }
     }
 }

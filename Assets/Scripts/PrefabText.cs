@@ -18,6 +18,7 @@ public class PrefabText : MonoBehaviour
 
     public void Motion(ulong bonus)
     {
+        Debug.Log("It works?");
         transform.localPosition = Vector2.zero;
         GetComponent<Text>().text = $"+{bonus}";
         _vector = new Vector2(Random.Range(-5,5), Random.Range(-5, 5));
